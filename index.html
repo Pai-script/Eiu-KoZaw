@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>EI PU - 15 DIGITS</title>
+<title>ZAW GYI CALCULATE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -37,543 +37,15 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
-    padding: 5px;
-  }
-  .prediction-box {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border-radius: 40px;
-    padding: 5px;
-    width: 100%;
-    max-width: 270px;
-    height: auto;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 10px var(--primary);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .prediction-title {
-    font-size: clamp(0.60rem, 1vw, 1rem);
-    color: var(--primary);
-    text-align: center;
-    margin: 0 0 8px 0;
-    text-shadow: 0 0 8px var(--primary);
-    flex-shrink: 0;
-  }
-  .stats-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    margin-bottom: 2px;
-    font-size: clamp(0.7rem, 3vw, 0.9rem);
-    flex-shrink: 0;
-  }
-  .stat-box {
-    background: rgba(0,0,0,0.3);
-    padding: 6px;
-    border-radius: 6px;
-    text-align: center;
-    flex: 1;
-    border: 1px solid rgba(0,255,136,0.1);
-  }
-  .stat-value {
-    font-weight: bold;
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-    margin-top: 2px;
-  }
-  .win-stat { color: var(--win); }
-  .lose-stat { color: var(--lose); }
-  .accuracy-stat { color: var(--secondary); }
-  .prediction-result {
-    font-size: clamp(1.2rem, 4vw, 1.6rem);
-    font-weight: bold;
-    text-align: center;
-    padding: 8px;
-    margin: 2px 0;
-    border-radius: 8px;
-    border: 2px solid #333;
-    background: rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .prediction-result.BIG { 
-    color: var(--win); 
-    border-color: var(--win);
-    text-shadow: 0 0 10px var(--win);
-    box-shadow: 0 0 15px rgba(0,255,136,0.3);
-  }
-  .prediction-result.SMALL { 
-    color: var(--lose); 
-    border-color: var(--lose);
-    text-shadow: 0 0 10px var(--lose);
-    box-shadow: 0 0 15px rgba(255,62,62,0.3);
-  }
-  .action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin: 2px 0;
-    flex-shrink: 0;
-  }
-  .win-lose-buttons {
-    display: flex;
-    gap: 5px;
-  }
-  .win-btn, .lose-btn {
-    flex: 1;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: clamp(0.9rem, 4vw, 1.3rem);
-    transition: all 0.2s;
-  }
-  .win-btn { 
-    background: rgba(0,255,136,0.2); 
-    color: var(--win);
-    border: 1px solid var(--win);
-  }
-  .win-btn:active {
-    background: rgba(0,255,136,0.3);
-    transform: scale(0.98);
-  }
-  .lose-btn { 
-    background: rgba(255,62,62,0.2); 
-    color: var(--lose);
-    border: 1px solid var(--lose);
-  }
-  .lose-btn:active {
-    background: rgba(255,62,62,0.3);
-    transform: scale(0.98);
-  }
-  .clear-all-btn {
-    width: 100%;
-    padding: 1px;
-    border-radius:50px;
-    border: none;
-    font-weight: bold;
-    font-size: clamp(1rem, 1vw, 0.9rem);
-    cursor: pointer;
-    background: rgba(200,50,50,0.3);
-    color: yellow;
-    transition: all 0.2s;
-  }
-  .clear-all-btn:active {
-    transform: scale(0.98);
-  }
-  .input-section {
-    margin-bottom: 0px;
-    flex-shrink: 0;
-  }
-  .input-label {
-    display: block;
-    margin-bottom: 1px;
-    color: var(--secondary);
-    font-size: clamp(1rem, 3vw, 2rem);
-  }
-  .input-field {
-    width: 100%;
-    padding: 5px;
-    background: var(--input-bg);
-    border: 5px solid rgba(0,255,136,0.3);
-    border-radius: 50px;
-    text-align: center;
-    font-size: clamp(1rem, 4vw, 3rem);
-    color: yellow;
-    user-select: none;
-  }
-  .number-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0px;
-    margin-top: auto;
-    flex-shrink: 0;
-  }
-  .number-btn {
-    background:white;
-    padding: 5px 5px;
-    border-radius: 60px;
-    border: 1px solid rgba(0,155,36,0.1);
-    font-size: clamp(2rem, 6vw, 1.6rem);
-    color: green;
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 1;
-    min-height: 1px;
-    transition: all 0.1s;
-  }
-  .number-btn:active {
-    background: blue;
-    color:green;
-    transform: scale(0.95);
-  }
-  #undo-btn {
-    font-size: clamp(1rem, 5vw, 1rem);
-  }
-  .empty-cell {
-    visibility: hidden;
-  }
-  .analysis-container {
-    background: rgba(0,0,0,0.3);
-    padding: 8px;
-    border-radius: 6px;
-    margin: 2px 0;
-    border: 1px solid var(--missing);
-    flex-shrink: 0;
-  }
-  .analysis-title {
-    color: var(--missing);
-    text-align: center;
-    margin-bottom: 1px;
-    font-size: clamp(0.8rem, 3vw, 1rem);
-  }
-  .analysis-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 2px;
-  }
-  .analysis-box {
-    flex: 1;
-    text-align: center;
-    padding: 6px;
-    border-radius: 2px;
-    background: rgba(0,0,0,0.2);
-  }
-  .analysis-box.big {
-    border: 1px solid var(--win);
-  }
-  .analysis-box.small {
-    border: 1px solid var(--lose);
-  }
-  .analysis-percentage {
-    font-size: clamp(1rem, 4vw, 1.5rem);
-    font-weight: bold;
-  }
-  .analysis-numbers {
-    font-size: clamp(0.7rem, 3vw, 0.9rem);
-    margin-top: 4px;
-  }
-  .prediction-info {
-    font-size: 0.6em;
-    margin-top: 0px;
-    color: #ccc;
-  }
-  .pattern-info {
-    text-align: center;
-    margin-top: 1px;
-    font-size: 0.7rem;
-    color: var(--pattern);
-  }
-  .input-count {
-    text-align: right;
-    font-size: 0.8rem;
-    margin-top: 2px;
-    color: var(--secondary);
-  }
-</style>
-</head>
-<body>
-<div class="container">
-  <div class="prediction-box">
-    <h2 class="prediction-title"><i class="fas fa-crystal-ball"></i> EI PU 15 DIGITS <i class="fas fa-magic"></i></h2>
-    
-    <div class="stats-container">
-      <div class="stat-box">WIN<div class="stat-value win-stat" id="win-count">0</div></div>
-      <div class="stat-box">Accuracy <div class="stat-value accuracy-stat" id="accuracy">0%</div></div>
-      <div class="stat-box">LOSE <div class="stat-value lose-stat" id="lose-count">0</div></div>
-    </div>
-
-    <div class="prediction-result" id="prediction">ကံကောင်းတဲ့နေ့ဖစ်ပါစေ EI PU မှ ဆုတောင်းပေးပါတယ်ရှင့်</div>
-    <div class="pattern-info" id="pattern-info"></div>
-    <div class="analysis-container" id="analysis-container" style="display: none;">
-      <div class="analysis-title">Ai Esmate Analysis</div>
-      <div class="analysis-content">
-        <div class="analysis-box big">
-          <div class="analysis-percentage" id="big-percentage">0%</div>
-          <div class="analysis-numbers" id="big-numbers">BIG: -</div>
-        </div>
-        <div class="analysis-box small">
-          <div class="analysis-percentage" id="small-percentage">0%</div>
-          <div class="analysis-numbers" id="small-numbers">SMALL: -</div>
-        </div>
-      </div>
-      <div class="prediction-info" id="prediction-info">Based on numbers missing from Ai ESMATE</div>
-    </div>
-
-    <div class="action-buttons">
-      <div class="win-lose-buttons">
-        <button class="win-btn" id="win-btn">Win</button>
-        <button class="lose-btn" id="lose-btn">Lose</button>
-      </div>
-      
-    <div class="input-section">
-      <label class="input-label"><span id="digit-count">အောက်ကနေအပေါ်သို့ဖြည့်ပေးပါ</span>/15</label>
-      <input type="text" id="results-input" class="input-field" placeholder="နောက်ဆုံးဂဏန်း၁၅ပြား" readonly>
-
-    </div>
-
-    <div class="number-buttons" id="numpad">
-      <button class="number-btn" data-number="1">1</button>
-      <button class="number-btn" data-number="2">2</button>
-      <button class="number-btn" data-number="3">3</button>
-      <button class="number-btn" id="undo-btn" title="Undo"><i class="fas fa-backspace"></i></button>
-      
-      <button class="number-btn" data-number="4">4</button>
-      <button class="number-btn" data-number="5">5</button>
-      <button class="number-btn" data-number="6">6</button>
-      <div class="empty-cell"></div>
-      
-      <button class="number-btn" data-number="7">7</button>
-      <button class="number-btn" data-number="8">8</button>
-      <button class="number-btn" data-number="9">9</button>
-      <button class="number-btn" data-number="0">0</button>
-      
-      <div class="empty-cell"></div>
-      <div class="empty-cell"></div>
-      <div class="empty-cell"></div>
-      <div class="empty-cell"></div>
-    </div>
-    <button class="clear-all-btn" id="clear-all-data">ကုလားရီးအော</button>
-    </div>
-
-  </div>
-</div>
-
-<script>
-  let winCount = 0, loseCount = 0;
-  let consecutiveLoses = 0;
-  let currentPrediction = null;
-  const patternLoseCounts = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-
-  const resultsInput = document.getElementById("results-input");
-  const analysisContainer = document.getElementById("analysis-container");
-  const patternInfo = document.getElementById("pattern-info");
-  const digitCount = document.getElementById("digit-count");
-
-  function updateStats() {
-    document.getElementById("win-count").textContent = winCount;
-    document.getElementById("lose-count").textContent = loseCount;
-    const total = winCount + loseCount;
-    document.getElementById("accuracy").textContent = total ? Math.round(winCount/total*100) + "%" : "0%";
-    
-    // Update pattern info
-    if (patternLoseCounts.includes(loseCount)) {
-      patternInfo.textContent = ` သတိထားကစားရန်(အရှုံး[${loseCount})ဖစ်နေပါတယ်`;
-      patternInfo.style.color = 'var(--pattern)';
-    } else {
-      patternInfo.textContent = '';
-      patternInfo.style.color = '#ccc';
-    }
-  }
-
-  function getPrediction(userInput) {
-    const last15Digits = userInput.slice(-15).split('').map(Number);
-    
-    // Count frequency of each number
-    const frequency = {};
-    for (let i = 0; i <= 9; i++) {
-      frequency[i] = 0;
-    }
-    
-    last15Digits.forEach(digit => {
-      frequency[digit]++;
-    });
-    
-    // Find missing numbers (those with frequency 0)
-    const missingNumbers = [];
-    for (let i = 0; i <= 9; i++) {
-      if (frequency[i] === 0) {
-        missingNumbers.push(i);
-      }
-    }
-    
-    let bigCount = 0;
-    let smallCount = 0;
-    const bigNumbers = [];
-    const smallNumbers = [];
-    
-    missingNumbers.forEach(num => {
-      if (num >= 5) {
-        bigCount++;
-        bigNumbers.push(num);
-      } else {
-        smallCount++;
-        smallNumbers.push(num);
-      }
-    });
-    
-    // Calculate percentages based on total possible missing numbers (max 5 for each)
-    const totalPossibleMissing = 5;
-    const bigPercentage = Math.round((bigCount / totalPossibleMissing) * 100);
-    const smallPercentage = Math.round((smallCount / totalPossibleMissing) * 100);
-    
-    let finalPrediction;
-    if (bigPercentage > smallPercentage) {
-      finalPrediction = "BIG";
-    } else if (smallPercentage > bigPercentage) {
-      finalPrediction = "SMALL";
-    } else {
-      // If equal, use the pattern from the last 15 digits
-      const bigInLast15 = last15Digits.filter(d => d >= 5).length;
-      const smallInLast15 = 15 - bigInLast15;
-      finalPrediction = bigInLast15 >= smallInLast15 ? "SMALL" : "BIG";
-    }
-    
-    return { 
-      finalPrediction,
-      bigPercentage,
-      smallPercentage,
-      bigNumbers,
-      smallNumbers,
-      missingNumbers,
-      calculation: `Missing numbers: ${missingNumbers.join(', ') || 'None'}`
-    };
-  }
-
-  function updatePredictionUI(data, reverse = false) {
-  const el = document.getElementById("prediction");
-  if (!data) { 
-    el.textContent = "ကံကောင်းတဲ့နေ့ဖစ်ပါစေ EI PU မှ ဆုတောင်းပေးပါတယ်ရှင့်"; 
-    el.className = "prediction-result"; 
-    analysisContainer.style.display = 'none';
-    return; 
-  }
-  
-  let displayPrediction = data.finalPrediction;
-  let displayBigPercentage = data.bigPercentage;
-  let displaySmallPercentage = data.smallPercentage;
-  let predictionInfo = "Ai Esmate Analysis";
-  
-  if (data.missingNumbers.length === 0) {
-    displayPrediction = data.finalPrediction === "BIG" ? "SMALL" : "BIG";
-    displayBigPercentage = 100 - data.bigPercentage;
-    displaySmallPercentage = 100 - data.smallPercentage;
-    predictionInfo = "No missing numbers - reversed prediction";
-  }
-  
-  //  ဒီနေရာမှာ အရင်က patternLoseCounts condition ကိုဖယ်ထားပြီး reverse parameter ကိုသာ သုံးမယ်
-  if (reverse) {
-    displayPrediction = displayPrediction === "BIG" ? "SMALL" : "BIG";
-    [displayBigPercentage, displaySmallPercentage] = [displaySmallPercentage, displayBigPercentage];
-    predictionInfo = `Opposite result (Lose count: ${loseCount})`;
-  }
-  
-  el.innerHTML = `
-    <div>${displayPrediction}</div>
-    <div class="prediction-info">${predictionInfo}</div>
-  `;
-  el.className = `prediction-result ${displayPrediction}`;
-  document.getElementById("big-percentage").textContent = `${displayBigPercentage}%`;
-  document.getElementById("small-percentage").textContent = `${displaySmallPercentage}%`;
-  document.getElementById("big-numbers").textContent = `BIG: ${data.bigNumbers.join(', ') || 'None'}`;
-  document.getElementById("small-numbers").textContent = `SMALL: ${data.smallNumbers.join(', ') || 'None'}`;
-  
-  analysisContainer.style.display = 'block';
-}
-
-  function calculateAndShowPrediction() {
-  const userInput = resultsInput.value;
-
-  if (userInput.length < 15) return alert("Need at least 15 digits");
-  
-  currentPrediction = getPrediction(userInput);
- updatePredictionUI(currentPrediction, false);  
-  console.log(currentPrediction.calculation);
-}
-
-  resultsInput.addEventListener("click", () => {
-    resultsInput.style.borderColor = "var(--primary)";
-  });
-
-  document.getElementById("win-btn").onclick = () => { 
-  calculateAndShowPrediction();
-  winCount++; 
-  consecutiveLoses = 0;
-  loseCount = 0; 
-  updateStats(); 
-
-  if (currentPrediction) {
-    updatePredictionUI(currentPrediction, false);
-  }
-};
-
-document.getElementById("lose-btn").onclick = () => { 
-  calculateAndShowPrediction();
-  loseCount++; 
-  consecutiveLoses++;
-  updateStats();
-
-
-  const reversePoints = [2, 3, 5, 7, 10, 11, 12, 14];
-  if (reversePoints.includes(loseCount) && currentPrediction) {
-    updatePredictionUI(currentPrediction, true);   // opposite
-  } else if (currentPrediction) {
-    updatePredictionUI(currentPrediction, false);  // normal
-  }
-};
-  document.getElementById("clear-all-data").onclick = () => {
-    if (!confirm("အကုန်ဖျက် မည်?")) return;
-    winCount = loseCount = 0;
-    consecutiveLoses = 0;
-    resultsInput.value = "";
-    digitCount.textContent = "0";
-    updateStats();
-    updatePredictionUI(null);
-    patternInfo.textContent = 'ဂဏန်း၁၅လုံးကိုမှန်မှန်ကန်ကန်သေချာစွာကရုစိုက်ဖြည့်ပါ';
-    patternInfo.style.color = '#ccc';
-  };
-  
-  document.querySelectorAll(".number-btn").forEach(btn => {
-    btn.onclick = () => {
-      if (btn.id === "undo-btn") {
-        // Undo functionality
-        resultsInput.value = resultsInput.value.slice(0, -1);
-        digitCount.textContent = resultsInput.value.length;
-        return;
-      }
-
-      const num = btn.dataset.number;
-      if (!num) return;
-
-      // For results input, we'll keep adding digits but only use last 15
-      resultsInput.value += num;
-      digitCount.textContent = resultsInput.value.length;
-      
-      // Automatically keep only the last 15 digits (shifting window)
-      if (resultsInput.value.length > 15) {
-        resultsInput.value = resultsInput.value.slice(-15);
-        digitCount.textContent = "15";
-      }
-    };
-  });
-
-  resultsInput.addEventListener('keydown', e => e.preventDefault());
-  resultsInput.addEventListener('paste', e => e.preventDefault());
-  resultsInput.addEventListener('input', e => e.preventDefault());
-
-  updateStats();
-</script>
-</body>
-</html>    align-items: center;
-    height: 100vh;
-    width: 100vw;
     padding: 10px;
   }
   .prediction-box {
     background: var(--glass);
     backdrop-filter: blur(10px);
-    border-radius: 40px;
-    padding: 10px;
+    border-radius: 15px;
+    padding: 15px;
     width: 100%;
-    max-width: 295px;
+    max-width: 400px;
     height: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 10px var(--primary);
     display: flex;
@@ -681,21 +153,21 @@ document.getElementById("lose-btn").onclick = () => {
   }
   .clear-all-btn {
     width: 100%;
-    padding: 1px;
-    border-radius:50px;
+    padding: 10px;
+    border-radius: 8px;
     border: none;
     font-weight: bold;
-    font-size: clamp(1.3rem, 1vw, 0.9rem);
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
     cursor: pointer;
-    background: rgba(200,50,50,0.3);
-    color: yellow;
+    background: rgba(255,62,62,0.3);
+    color: var(--lose);
     transition: all 0.2s;
   }
   .clear-all-btn:active {
     transform: scale(0.98);
   }
   .input-section {
-    margin-bottom: 0px;
+    margin-bottom: 1px;
     flex-shrink: 0;
   }
   .input-label {
@@ -709,9 +181,9 @@ document.getElementById("lose-btn").onclick = () => {
     padding: 10px;
     background: var(--input-bg);
     border: 5px solid rgba(0,255,136,0.3);
-    border-radius: 50px;
+    border-radius: 8px;
     text-align: center;
-    font-size: clamp(1.90rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     color: yellow;
     user-select: none;
   }
@@ -723,11 +195,11 @@ document.getElementById("lose-btn").onclick = () => {
     flex-shrink: 0;
   }
   .number-btn {
-    background:white;
-    padding: 5px 5px;
+    background: var(--button-bg);
+    padding: 4px 2px;
     border-radius: 60px;
     border: 1px solid rgba(0,155,36,0.1);
-    font-size: clamp(4rem, 6vw, 1.6rem);
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
     color: green;
     cursor: pointer;
     user-select: none;
@@ -735,12 +207,12 @@ document.getElementById("lose-btn").onclick = () => {
     justify-content: center;
     align-items: center;
     aspect-ratio: 1;
-    min-height: 1px;
+    min-height: 10px;
     transition: all 0.1s;
   }
   .number-btn:active {
-    background: blue;
-    color:green;
+    background: var(--primary);
+    color: black;
     transform: scale(0.95);
   }
   #undo-btn {
@@ -794,33 +266,21 @@ document.getElementById("lose-btn").onclick = () => {
     margin-top: 1px;
     color: #ccc;
   }
-  .pattern-info {
-    text-align: center;
-    margin-top: 5px;
-    font-size: 0.7rem;
-    color: var(--pattern);
-  }
-  .input-count {
-    text-align: right;
-    font-size: 0.8rem;
-    margin-top: 2px;
-    color: var(--secondary);
-  }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="prediction-box">
-    <h2 class="prediction-title"><i class="fas fa-crystal-ball"></i> EI PU 15 DIGITS <i class="fas fa-magic"></i></h2>
+    <h2 class="prediction-title"><i class="fas fa-crystal-ball"></i> ZAW GYI CALCULATE <i class="fas fa-magic"></i></h2>
     
     <div class="stats-container">
-      <div class="stat-box">WIN<div class="stat-value win-stat" id="win-count">0</div></div>
+      <div class="stat-box">Win <div class="stat-value win-stat" id="win-count">0</div></div>
       <div class="stat-box">Accuracy <div class="stat-value accuracy-stat" id="accuracy">0%</div></div>
-      <div class="stat-box">LOSE <div class="stat-value lose-stat" id="lose-count">0</div></div>
+      <div class="stat-box">Lose <div class="stat-value lose-stat" id="lose-count">0</div></div>
     </div>
 
-    <div class="prediction-result" id="prediction">ကံကောင်းတဲ့နေ့ဖစ်ပါစေ EI PU မှ ဆုတောင်းပေးပါတယ်ရှင့်</div>
-    <div class="pattern-info" id="pattern-info"></div>
+    <div class="prediction-result" id="prediction">PREDICT</div>
+
     <div class="analysis-container" id="analysis-container" style="display: none;">
       <div class="analysis-title">Ai Esmate Analysis</div>
       <div class="analysis-content">
@@ -843,9 +303,8 @@ document.getElementById("lose-btn").onclick = () => {
       </div>
       
     <div class="input-section">
-      <label class="input-label"><span id="digit-count">အောက်ကနေအပေါ်သို့ဖြည့်ပေးပါ</span>/15</label>
-      <input type="text" id="results-input" class="input-field" placeholder="နောက်ဆုံးဂဏန်း၁၅ပြား" readonly>
-
+      <label class="input-label">Enter numbers (last 10 digits)</label>
+      <input type="text" id="results-input" class="input-field" placeholder="Enter last 10 results" readonly>
     </div>
 
     <div class="number-buttons" id="numpad">
@@ -869,7 +328,7 @@ document.getElementById("lose-btn").onclick = () => {
       <div class="empty-cell"></div>
       <div class="empty-cell"></div>
     </div>
-    <button class="clear-all-btn" id="clear-all-data">ကုလားရီးအော</button>
+    <button class="clear-all-btn" id="clear-all-data">Clear All</button>
     </div>
 
   </div>
@@ -879,47 +338,35 @@ document.getElementById("lose-btn").onclick = () => {
   let winCount = 0, loseCount = 0;
   let consecutiveLoses = 0;
   let currentPrediction = null;
-  const patternLoseCounts = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
   const resultsInput = document.getElementById("results-input");
   const analysisContainer = document.getElementById("analysis-container");
-  const patternInfo = document.getElementById("pattern-info");
-  const digitCount = document.getElementById("digit-count");
 
   function updateStats() {
     document.getElementById("win-count").textContent = winCount;
     document.getElementById("lose-count").textContent = loseCount;
     const total = winCount + loseCount;
     document.getElementById("accuracy").textContent = total ? Math.round(winCount/total*100) + "%" : "0%";
-    
-    // Update pattern info
-    if (patternLoseCounts.includes(loseCount)) {
-      patternInfo.textContent = ` ❌သတိထားကစားရန်❌(အရှုံး[${loseCount})​​ဖစ်နေပါတယ်`;
-      patternInfo.style.color = 'var(--pattern)';
-    } else {
-      patternInfo.textContent = '💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯💯';
-      patternInfo.style.color = '#ccc';
-    }
   }
 
   function getPrediction(userInput) {
-    const last15Digits = userInput.slice(-15).split('').map(Number);
-    
-    // Count frequency of each number
-    const frequency = {};
-    for (let i = 0; i <= 9; i++) {
-      frequency[i] = 0;
+    // Check if input matches the pattern "1234567890"
+    if (userInput === "1234567890") {
+      // Use only the last 7 digits "7924680" for comparison
+      userInput = "7924680";
+    } else {
+      // Otherwise, use the last 10 digits as before
+      userInput = userInput.slice(-10);
     }
     
-    last15Digits.forEach(digit => {
-      frequency[digit]++;
-    });
+    const digits = userInput.split('').map(Number);
+    const fixedPattern = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     
-    // Find missing numbers (those with frequency 0)
     const missingNumbers = [];
-    for (let i = 0; i <= 9; i++) {
-      if (frequency[i] === 0) {
-        missingNumbers.push(i);
+    for (let i = 0; i < fixedPattern.length; i++) {
+      const num = fixedPattern[i];
+      if (!digits.includes(num) && !missingNumbers.includes(num)) {
+        missingNumbers.push(num);
       }
     }
     
@@ -938,10 +385,9 @@ document.getElementById("lose-btn").onclick = () => {
       }
     });
     
-    // Calculate percentages based on total possible missing numbers (max 5 for each)
-    const totalPossibleMissing = 5;
-    const bigPercentage = Math.round((bigCount / totalPossibleMissing) * 100);
-    const smallPercentage = Math.round((smallCount / totalPossibleMissing) * 100);
+    // Calculate percentages based on 5 possible missing numbers (0-4 and 5-9)
+    const bigPercentage = Math.round((bigCount / 5) * 100);
+    const smallPercentage = Math.round((smallCount / 5) * 100);
     
     let finalPrediction;
     if (bigPercentage > smallPercentage) {
@@ -949,10 +395,10 @@ document.getElementById("lose-btn").onclick = () => {
     } else if (smallPercentage > bigPercentage) {
       finalPrediction = "SMALL";
     } else {
-      // If equal, use the pattern from the last 15 digits
-      const bigInLast15 = last15Digits.filter(d => d >= 5).length;
-      const smallInLast15 = 15 - bigInLast15;
-      finalPrediction = bigInLast15 >= smallInLast15 ? "SMALL" : "BIG";
+      // If percentages are equal, use pattern distribution
+      const patternBigCount = fixedPattern.filter(d => d >= 5).length;
+      const patternSmallCount = 10 - patternBigCount;
+      finalPrediction = patternBigCount >= patternSmallCount ? "BIG" : "SMALL";
     }
     
     return { 
@@ -969,7 +415,7 @@ document.getElementById("lose-btn").onclick = () => {
   function updatePredictionUI(data, reverse = false) {
     const el = document.getElementById("prediction");
     if (!data) { 
-      el.textContent = "ကံကောင်းတဲ့နေ့ဖစ်ပါစေ EI PU မှ ဆုတောင်းပေးပါတယ်ရှင့်"; 
+      el.textContent = "PREDICT"; 
       el.className = "prediction-result"; 
       analysisContainer.style.display = 'none';
       return; 
@@ -978,7 +424,7 @@ document.getElementById("lose-btn").onclick = () => {
     let displayPrediction = data.finalPrediction;
     let displayBigPercentage = data.bigPercentage;
     let displaySmallPercentage = data.smallPercentage;
-    let predictionInfo = "Ai Esmate Analysis";
+    let predictionInfo = "Ai Esmate analysis";
     
     if (data.missingNumbers.length === 0) {
       displayPrediction = data.finalPrediction === "BIG" ? "SMALL" : "BIG";
@@ -987,11 +433,10 @@ document.getElementById("lose-btn").onclick = () => {
       predictionInfo = "No missing numbers - reversed prediction";
     }
     
-    // Check if we need to reverse based on lose count pattern
-    if (reverse && patternLoseCounts.includes(loseCount)) {
+    if (reverse) {
       displayPrediction = displayPrediction === "BIG" ? "SMALL" : "BIG";
       [displayBigPercentage, displaySmallPercentage] = [displaySmallPercentage, displayBigPercentage];
-      predictionInfo = `အရှုံးကိုရင်ဆိုင်လိုက်(Lose: ${loseCount})`;
+      predictionInfo = "Reversed due to two consecutive loses";
     }
     
     el.innerHTML = `
@@ -999,7 +444,7 @@ document.getElementById("lose-btn").onclick = () => {
       <div class="prediction-info">${predictionInfo}</div>
     `;
     el.className = `prediction-result ${displayPrediction}`;
-    document.getElementById("big-percentage").textContent = `${displayBigPercentage}%`;
+     document.getElementById("big-percentage").textContent = `${displayBigPercentage}%`;
     document.getElementById("small-percentage").textContent = `${displaySmallPercentage}%`;
     document.getElementById("big-numbers").textContent = `BIG: ${data.bigNumbers.join(', ') || 'None'}`;
     document.getElementById("small-numbers").textContent = `SMALL: ${data.smallNumbers.join(', ') || 'None'}`;
@@ -1008,77 +453,62 @@ document.getElementById("lose-btn").onclick = () => {
   }
 
   function calculateAndShowPrediction() {
-  const userInput = resultsInput.value;
+    const userInput = resultsInput.value;
 
-  if (userInput.length < 15) return alert("Need at least 15 digits");
-  
-  currentPrediction = getPrediction(userInput);
- updatePredictionUI(currentPrediction, false);  
-  console.log(currentPrediction.calculation);
-}
+    if (userInput.length < 10 && userInput !== "1234567890") return alert("Need at least 10 digits");
+    
+    currentPrediction = getPrediction(userInput);
+    updatePredictionUI(currentPrediction);
+    console.log(currentPrediction.calculation);
+  }
 
   resultsInput.addEventListener("click", () => {
     resultsInput.style.borderColor = "var(--primary)";
   });
 
   document.getElementById("win-btn").onclick = () => { 
-  calculateAndShowPrediction();
-  winCount++; 
-  consecutiveLoses = 0;
-  loseCount = 0; 
-  updateStats(); 
+    calculateAndShowPrediction();
+    winCount++; 
+    consecutiveLoses = 0;
+    updateStats(); 
+  };
 
-  if (currentPrediction) {
-    updatePredictionUI(currentPrediction, false);
-  }
-};
+  document.getElementById("lose-btn").onclick = () => { 
+    calculateAndShowPrediction();
+    loseCount++; 
+    consecutiveLoses++;
+    updateStats();
+    
+    if (consecutiveLoses >= 2 && currentPrediction) {
+      updatePredictionUI(currentPrediction, true);
+    }
+  };
 
-document.getElementById("lose-btn").onclick = () => { 
-  calculateAndShowPrediction();
-  loseCount++; 
-  consecutiveLoses++;
-  updateStats();
-
-
-  const reversePoints = [2, 3, 5, 7, 10, 11, 12, 14];
-  if (reversePoints.includes(loseCount) && currentPrediction) {
-    updatePredictionUI(currentPrediction, true);   // opposite
-  } else if (currentPrediction) {
-    updatePredictionUI(currentPrediction, false);  // normal
-  }
-};
   document.getElementById("clear-all-data").onclick = () => {
-    if (!confirm("အကုန်ဖျက် မည်?")) return;
+    if (!confirm("Clear all data?")) return;
     winCount = loseCount = 0;
     consecutiveLoses = 0;
     resultsInput.value = "";
-    digitCount.textContent = "0";
     updateStats();
     updatePredictionUI(null);
-    patternInfo.textContent = 'ဂဏန်း၁၅လုံးကိုမှန်မှန်ကန်ကန်သေချာစွာကရုစိုက်ဖြည့်ပါ';
-    patternInfo.style.color = '#ccc';
   };
-  
   document.querySelectorAll(".number-btn").forEach(btn => {
     btn.onclick = () => {
       if (btn.id === "undo-btn") {
         // Undo functionality
         resultsInput.value = resultsInput.value.slice(0, -1);
-        digitCount.textContent = resultsInput.value.length;
         return;
       }
 
       const num = btn.dataset.number;
       if (!num) return;
 
-      // For results input, we'll keep adding digits but only use last 15
+      // For results input, we'll keep adding digits but only use last 10
       resultsInput.value += num;
-      digitCount.textContent = resultsInput.value.length;
       
-      // Automatically keep only the last 15 digits (shifting window)
-      if (resultsInput.value.length > 15) {
-        resultsInput.value = resultsInput.value.slice(-15);
-        digitCount.textContent = "15";
+      // Automatically keep only the last 10 digits (shifting window)
+      if (resultsInput.value.length > 10) {
+        resultsInput.value = resultsInput.value.slice(-10);
       }
     };
   });
